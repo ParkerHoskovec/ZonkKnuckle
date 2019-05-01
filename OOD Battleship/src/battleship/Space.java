@@ -4,11 +4,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Space extends ImageView {
-	static Image trans = new Image("https://i.imgur.com/hC4v7fo.png");
-	static Image missTemp = new Image("https://i.imgur.com/mKC6loN.png");
-	static Image hitTemp = new Image("https://i.imgur.com/lbpqlVw.png");
-	static Image shipTemp = new Image("https://i.imgur.com/ESGw5NR.png");
-	static Image hitShipTemp = new Image("https://i.imgur.com/naooKUA.png");
+	static Image trans = new Image("https://i.imgur.com/5YogoxQ.png");
+	static Image missTemp = new Image("https://i.imgur.com/bVRXYCS.png");
+	static Image hitTemp = new Image("https://i.imgur.com/7oww838.png");
+	static Image shipTemp = new Image("https://i.imgur.com/Q4kQ6dp.png");
+	static Image hitShipTemp = new Image("https://i.imgur.com/FeHX1jq.png");
 	String identifier;
 	Image spacePic;
 	int x;

@@ -20,10 +20,10 @@ public abstract class Main extends Application{
 	boolean myTurn = true;
 	int shipsPlaced = 0;
 	ReceivedCommandFactory fact = new ReceivedCommandFactory();
-	Image boardPlayer = new Image("https://i.imgur.com/UIOEQRN.png");
-	Image boardFoe = new Image("https://i.imgur.com/UIOEQRN.png");
-	Space[][] boardPlayerState = new Space[8][8];
-	Space[][] boardFoeState = new Space[8][8];
+	Image boardPlayer = new Image("https://i.imgur.com/WCVmiVJ.png");
+	Image boardFoe = new Image("https://i.imgur.com/WCVmiVJ.png");
+	Space[][] boardPlayerState = new Space[10][10];
+	Space[][] boardFoeState = new Space[10][10];
 	Label turnDisp = new Label();
 	ArrayList<Ship> ships = new ArrayList<Ship>();
 	
@@ -37,14 +37,14 @@ public abstract class Main extends Application{
 	public Pane totalInit() {
 		//make the pane that serves as the foundation for the whole thing
 		Pane boardPane = new Pane();
-		boardPane.setMinSize(330, 270);
-		boardPane.setMaxSize(330,270);
+		boardPane.setMinSize(700, 400);
+		boardPane.setMaxSize(700, 400);
 		turnDisp = new Label("Welcome to battleship!");
 		ImageView boardPlayDisp = new ImageView(boardPlayer);
 		ImageView boardFoeDisp = new ImageView(boardFoe);
-		boardPlayDisp.setLayoutY(20);
-		boardFoeDisp.setLayoutX(170);
-		boardFoeDisp.setLayoutY(20);
+		boardPlayDisp.setLayoutY(32);
+		boardFoeDisp.setLayoutX(330);
+		boardFoeDisp.setLayoutY(32);
 		boardPane.getChildren().add(turnDisp);
 		boardPane.getChildren().add(boardPlayDisp);
 		boardPane.getChildren().add(boardFoeDisp);
@@ -54,8 +54,8 @@ public abstract class Main extends Application{
 		redrawBoards(); 
 		//THEN add listeners to every single one of them
 		//this is the observer pattern here:
-		for(int x=0;x<8;x++) {
-			for(int y=0;y<8;y++) {
+		for(int x=0;x<10;x++) {
+			for(int y=0;y<10;y++) {
 				boardFoeState[x][y].setOnMouseClicked(new EventHandler<MouseEvent>(){
 					public void handle(MouseEvent event) {
 						Space source = (Space)event.getSource();
@@ -69,8 +69,8 @@ public abstract class Main extends Application{
 				
 			}	
 		}
-		for(int x=0;x<8;x++) {
-			for(int y=0;y<8;y++) {
+		for(int x=0;x<10;x++) {
+			for(int y=0;y<10;y++) {
 				boardPlayerState[x][y].setOnMouseClicked(new EventHandler<MouseEvent>(){
 					public void handle(MouseEvent event) {
 						Space source = (Space)event.getSource();
@@ -85,8 +85,8 @@ public abstract class Main extends Application{
 			}	
 		}
 		//add all those pictures to the pane
-		for(int x=0;x<8;x++) {
-			for(int y=0;y<8;y++) {
+		for(int x=0;x<10;x++) {
+			for(int y=0;y<10;y++) {
 				boardPane.getChildren().add(boardPlayerState[x][y]);
 				boardPane.getChildren().add(boardFoeState[x][y]);
 			}
@@ -97,15 +97,15 @@ public abstract class Main extends Application{
 	
 	//method to update ImageViews based on state of Space arrays
 	public void redrawBoards() {
-		for(int x=0;x<8;x++) {
-			for(int y=0;y<8;y++) {
+		for(int x=0;x<10;x++) {
+			for(int y=0;y<10;y++) {
 				boardPlayerState[x][y].setImage(boardPlayerState[x][y].spacePic);
-				boardPlayerState[x][y].setLayoutX(x*20);
-				boardPlayerState[x][y].setLayoutY(20+(y*20));
+				boardPlayerState[x][y].setLayoutX(x*32);
+				boardPlayerState[x][y].setLayoutY(32+(y*32));
 				boardPlayerState[x][y].setIdentifier(this.toString());
 				boardFoeState[x][y].setImage(boardFoeState[x][y].spacePic);
-				boardFoeState[x][y].setLayoutX(170+(x*20));
-				boardFoeState[x][y].setLayoutY(20+(y*20));
+				boardFoeState[x][y].setLayoutX(330+(x*32));
+				boardFoeState[x][y].setLayoutY(32+(y*32));
 				boardFoeState[x][y].setIdentifier(this.toString());
 			}
 		}
@@ -115,8 +115,8 @@ public abstract class Main extends Application{
 	
 	//initialize the board state Space arrays to be blank on both sides
 	public void reinitBoards() {
-		for(int x=0;x<8;x++) {
-			for(int y=0;y<8;y++) {
+		for(int x=0;x<10;x++) {
+			for(int y=0;y<10;y++) {
 				boardPlayerState[x][y] = new Space(false, x, y); //space constructor w/ boolean determines target/playfield status
 				boardFoeState[x][y] = new Space(true,x, y);
 			}

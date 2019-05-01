@@ -85,6 +85,7 @@ public class HostMain extends Main {
 		}).start();
 	}
 
+	//test
 	public void stop() {
 		try {
 			dead = true;
