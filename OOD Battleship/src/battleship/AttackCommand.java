@@ -13,9 +13,17 @@ public class AttackCommand implements Command{
 	}
 	public String execute() {
 		String result = target.boardPlayerState[xCord][yCord].hit();
-		target.setTurn(true);
 		target.redrawBoards();
-		return result;
+		boolean lose = target.doILose();
+		if(lose) {
+			target.setTurn(false);
+			target.setLabel("You lose! Better luck next time.");
+			return "0|0|win|response|from"+target.toString();
+		}
+		else {
+			target.setTurn(true);
+			return result;
+		}
 		
 	}
 	public void execute(Space[][] spaces) {

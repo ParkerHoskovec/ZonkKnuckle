@@ -15,7 +15,7 @@ public class HostMain extends Main {
 	static Socket s;
 	static DataInputStream din;
 	static DataOutputStream dout;
-	
+
 	public static void main(String[] args) {
 		launch();
 	}
@@ -28,18 +28,13 @@ public class HostMain extends Main {
 	
 	@Override
 	public void start(Stage primStage) throws Exception {
+		//myTurn = false;
 		//UI Stuff
 		Pane contentPane = totalInit();
 		Scene boardScene = new Scene(contentPane);
 		primStage.setScene(boardScene);
 		primStage.show();
-		//TODO: REMOVE this hardcoded ship
-		ExShip hardShip = new ExShip(boardPlayerState[2][3],  new Space[]{boardPlayerState[2][3]});
-		boardPlayerState[2][3].addShip(hardShip);
-		ships.add(hardShip);
-		redrawBoards();
-		//okay here we go again
-		//makes a background thread to read from the socket
+		//this is the socket handler thread- it continually listens to the socket in the background and uses the results to make commands
 		new Thread(() -> {
 			try {
 				ss = new ServerSocket(1201);
@@ -116,10 +111,58 @@ public class HostMain extends Main {
 		return "Hostmain";
 	}
 
+	//Placement of 5 ships only on non occupied spaces
 	@Override
 	void shipPlacement(Space selection) {
-		// TODO Auto-generated method stub
-		
+		int ex = selection.x;
+		int ey = selection.y;
+		Space[] spaces;
+		Space origin = boardPlayerState[ex][ey];
+		ExShip newShip;
+		switch (shipsPlaced) {
+		case 0:
+			if (!selection.hasShip) {
+				newShip = new ExShip(origin,new Space[] {origin}); 
+				ships.add(newShip);
+				redrawBoards();
+				shipsPlaced++;
+			}
+			break;
+
+		case 1:
+			if (!selection.hasShip) {
+				newShip = new ExShip(origin,new Space[] {origin}); 
+				ships.add(newShip);
+				redrawBoards();
+				shipsPlaced++;
+			}
+			break;
+
+		case 2:
+			if (!selection.hasShip) {
+				newShip = new ExShip(origin,new Space[] {origin}); 
+				ships.add(newShip);
+				redrawBoards();
+				shipsPlaced++;
+			}
+			break;
+
+		case 3:
+			if (!selection.hasShip) {
+				newShip = new ExShip(origin,new Space[] {origin}); 
+				ships.add(newShip);
+				redrawBoards();
+				setTurn(true);
+				setLabel("Penis!");
+				shipsPlaced++;
+			}
+			break;
+
+		default:
+			break;
+
+		}
+
 	}
 
 }

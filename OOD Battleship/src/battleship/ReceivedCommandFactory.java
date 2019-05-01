@@ -16,6 +16,9 @@ public class ReceivedCommandFactory {
 		else if(type.equals("hit")) {
 			return new HitCommand(from, x, y);
 		}
+		else if(type.equals("win")) {
+			return new WinCommand(from);
+		}
 		//TODO: Create an actual default command for when fucked-up strings get passed.
 		else return new AttackCommand(from, x, y);
 	}

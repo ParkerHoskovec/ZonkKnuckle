@@ -26,6 +26,7 @@ public abstract class Main extends Application{
 	Space[][] boardFoeState = new Space[10][10];
 	Label turnDisp = new Label();
 	ArrayList<Ship> ships = new ArrayList<Ship>();
+	Space lastSelected;
 	
 	public static void main(String[] args) {
 		launch();
@@ -63,6 +64,7 @@ public abstract class Main extends Application{
 						if(myTurn && !source.chosen) {
 							makeCommands(source);
 							source.chosen = true;
+							lastSelected = source;
 						}
 					}
 				});
@@ -148,7 +150,21 @@ public abstract class Main extends Application{
 	}
 	//this method sets the label to a string
 	public void setLabel(String stuff) {
-		turnDisp.setText(stuff);
+		Platform.runLater(new Runnable() {
+	    @Override
+	    public void run() {
+			turnDisp.setText(stuff);
+	    }
+	});
+	}
+	//this method checks the ships arraylist to see if all the ships are destroyed
+	public boolean doILose() {
+		for(Ship s:this.ships) {
+			if(!s.isDestroyed()) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 

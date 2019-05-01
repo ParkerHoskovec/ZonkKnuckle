@@ -27,13 +27,14 @@ public class ExShip implements Ship {
 	}
 	@Override
 	public boolean isDestroyed() {
-		boolean dead = true; //assumes the ship is dead
-		for(Space s:array) { //iterates over all the spaces
-			if(!s.isHit) {
-				dead=false;
-			}
-		}
-		return dead;
+//		for(Space s:array) { //iterates over all the spaces
+//			if(!s.isHit) {
+//				return false; //returns false if any part is not hit
+//			}
+//		}
+//		return true; //otherwise returns true
+		if(origin.isHit) return true;
+		else return false;
 	}
 
 }

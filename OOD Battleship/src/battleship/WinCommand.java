@@ -2,20 +2,17 @@ package battleship;
 
 public class WinCommand implements Command{
 	Main target;
-	int xCord;
-	int yCord;
-	
-	public WinCommand(Main target, int x, int y) {
+
+	public WinCommand(Main target) {
 		this.target = target;
-		this.xCord = x;
-		this.yCord = y;
+
 	}
 	@Override
 	public String execute() {
-		target.boardFoeState[xCord][yCord].targHit();
-		target.redrawBoards();
 		target.setTurn(false);
-		target.setLabel("YOU DID IT!");
+		target.setLabel("YOU WIN!");
+		target.lastSelected.targHit();
+		target.redrawBoards();
 		return "win";
 	}
 
